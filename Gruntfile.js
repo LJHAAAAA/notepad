@@ -29,50 +29,11 @@ module.exports = function (grunt) {
         dest: 'dist/index.html'
       }
     },
-    copy: {
-      html: {
-        src: 'demo/index.html',
-        dest: 'dist/index.html'
-      }
-    },
-    concat: {
-      js: {
-        src: ['demo/js/*.js', 'demo/com/**/*.js'],
-        dest: 'dist/bundle.js'
-      },
-      css: {
-        src: ['demo/css/*.css', 'demo/com/**/*.css'],
-        dest: 'dist/bundle.css'
-      }
-    },
     uglify: {
       'dist/bundle.min.js': 'dist/bundle.js'
     },
     cssmin: {
       'dist/bundle.min.css': 'dist/bundle.css'
-    },
-    useminPrepare: {
-      html: 'index.html',
-      options: {
-        dest: 'dist'
-      }
-    },
-    usemin: {
-      html: ['dist/index.html']
-    },
-    clean: {
-      end: ['dist/bundle.css', 'dist/bundle.js', '.tmp']
-    },
-    babel: {
-      options: {
-        sourceMap: false,
-        presets: ['babel-preset-es2015']
-      },
-      dist: {
-        files: {
-          'dist/bundle.js': 'dist/bundle.js'
-        }
-      }
     }
   });
 
@@ -80,15 +41,11 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-eslint');
 
-  grunt.loadNpmTasks('grunt-babel');
-  grunt.loadNpmTasks('grunt-contrib-concat');
+ 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
-  grunt.loadNpmTasks('grunt-usemin');
+  
 
-  grunt.registerTask('lint', ['htmlhint', 'csslint', 'eslint']);
-  grunt.registerTask('build', ['copy:html', 'useminPrepare', 'concat', 'babel', 'uglify', 'cssmin', 'usemin', 'htmlmin', 'clean']);
+  grunt.registerTask('build', ['uglify', 'cssmin',  'htmlmin', 'htmlhint', 'csslint', 'eslint']);
 };
